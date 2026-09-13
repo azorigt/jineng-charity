@@ -9,8 +9,8 @@
     --yellow:#FFC907;
     --blue:#2E9DF7;
     --teal:#8BD1CB;
-    --black:#000000;
-    --white:#FFFFFF;
+    --black:#1A1A1A;
+    --white:#FFF7E1;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;}
@@ -42,12 +42,16 @@
     position:absolute;
     top:20px; left:50%;
     transform: translateX(-50%);
-    display:flex; align-items:center; gap:8px;
-    color:#fff; font-size:15px; font-weight:600;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     z-index: 5;
   }
-  .can-icon{ width:16px; height:19px; background:var(--yellow); border-radius:2px; }
+  #logo img{
+    display:block;
+    width:150px;
+    height:40px;
+    object-fit:cover;
+    object-position:center;
+    mix-blend-mode:multiply;
+  }
 
   #hud{
     position:absolute;
@@ -102,6 +106,10 @@
   }
   button.cta:hover{ transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 22px rgba(255,201,7,0.55); }
   button.cta:active{ transform: translateY(0) scale(0.98); }
+  button.cta:focus-visible{
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+  }
 
   #player{
     position:absolute;
@@ -165,8 +173,8 @@
 <body>
 
 <div id="game">
-  <div id="logo"><span class="can-icon"></span> charity: water</div>
-  <div id="hud" class="hidden">
+  <div id="logo"><img src="img/chwater_logo_black.png" alt="charity: water"></div>
+  <div id="hud" class="hidden" aria-live="polite">
     <div class="pill"><span class="label">MI</span><span id="distance">0.0</span></div>
     <div class="pill"><span class="label">🚰</span><span id="cans">0</span></div>
   </div>
@@ -178,7 +186,7 @@
   <div id="screen">
     <h1>THE WATER<span>WALK</span></h1>
     <p>Collect clean water. Dodge dirty puddles. See how far a walk for water really goes.</p>
-    <button class="cta" id="startBtn">START WALKING →</button>
+    <button class="cta" id="startBtn" type="button">START WALKING →</button>
   </div>
 </div>
 
@@ -251,6 +259,7 @@ function spawnEntity(){
 }
 
 function endGame(){
+  if(!running) return;
   running = false;
   cancelAnimationFrame(loopId);
   const miles = distance.toFixed(1);
@@ -291,7 +300,6 @@ function loop(){
   }
   if(obstacleCooldown > 0) obstacleCooldown--;
 
-  const groundY = gameEl.clientHeight * 0.22;
   const playerLeft = 90, playerRight = 90 + 46;
 
   entities.forEach(e => {
@@ -324,9 +332,15 @@ function loop(){
 }
 
 startBtn.addEventListener('click', startGame);
-document.addEventListener('keydown', (e) => { if(e.code === 'Space') jump(); });
-gameEl.addEventListener('touchstart', () => { if(running) jump(); });
-gameEl.addEventListener('mousedown', () => { if(running) jump(); });
+document.addEventListener('keydown', (e) => {
+  if((e.code === 'Space' || e.code === 'ArrowUp') && running){
+    e.preventDefault();
+    jump();
+  }
+});
+gameEl.addEventListener('pointerdown', (e) => {
+  if(running && e.target === gameEl) jump();
+});
 </script>
 
 </body>

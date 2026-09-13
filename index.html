@@ -5,35 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>charity: water — Small Gift, Real Impact</title>
 <link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <img src="img/charitywater_logo_horizontal_BlackText.png" alt="charity: water">
+      <img src="img/chwater_logo_black.png" alt="charity: water">
     </div>
     <div class="menu">
-      <button class="menu-toggle" type="button" aria-label="Open navigation menu">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <nav>
-        <a href="#">WHY WATER</a>
-        <a href="#">our work</a>
-        <a href="#">stories</a>
+      <nav id="site-nav">
+        <a href="https://www.charitywater.org/whywater" target="_blank" rel="noreferrer">WHY WATER</a>
+        <a href="https://www.charitywater.org/our-work" target="_blank" rel="noreferrer">our work</a>
+        <a href="https://www.charitywater.org/stories" target="_blank" rel="noreferrer">stories</a>
         <a href="#game-section">play the game</a>
-        <a href="#" class="donate">DONATE</a>
+        <a href="https://www.charitywater.org/donate" target="_blank" rel="noreferrer" class="donate">DONATE</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="hero-copy">
       <div class="eyebrow">CLEAN WATER CHANGES EVERYTHING!</div>
-      <h1>Your $10 Can<br>Be Part of Something Bigger!</h1>
+      <h1>Your $10 Can<br>Be Part of <span>Something Bigger!</span></h1>
       <p class="sub">Join thousands turning everyday generosity into real impact — one verified project at a time.</p>
-      <a href="#" class="cta">START WITH $10 →</a>
+      <a href="https://www.charitywater.org/donate" target="_blank" rel="noreferrer" class="cta">START WITH $10 →</a>
       <div class="microcopy">Every contribution adds up.</div>
     </div>
     <div class="hero-photo">
